@@ -19,60 +19,61 @@ $(document)
 			.on('click', '.nav-item-text', handleItemClick);
 		$(document)
 			.on('click', '.clickable-nav-item', handleFileItemClick);
-			$(document).on('keydown', '.folder-item', handleFileItemKeyDown);
+		$(document)
+			.on('keydown', '.folder-item', handleFileItemKeyDown);
 
 
 		// var treeViewJSON = {
-			// items: [{
-			// 	name: 'Servers',
-			// 	id: 'folder-1',
-			// 	type: 'folder',
-			// 	data: {},
-			// 	folderChildren: [{
-			// 		name: 'new Folder',
-			// 		type: 'folder'
-			// 	}, {
-			// 		name: 'Raspberry Pi 1',
-			// 		id: 'file-1',
-			// 		type: 'file',
-			// 		extraInfo: {
-			// 			ipAddress: '',
-			// 			username: '',
-			// 			password: ''
-			// 		}
-			// 	}, {
-			// 		name: 'Raspberry Pi 2',
-			// 		id: 'file-2',
-			// 		type: 'file',
-			// 		extraInfo: {
-			// 			ipAddress: '',
-			// 			username: '',
-			// 			password: ''
-			// 		}
-			// 	}]
-			// }, {
-			// 	name: 'Packages',
-			// 	id: 'folder-2',
-			// 	type: 'folder',
-			// 	folderChildren: [{
-			// 		name: 'Disk Utils',
-			// 		type: 'folder',
-			// 		folderChildren: [{
-			// 			name: 'List',
-			// 			id: 'file-1',
-			// 			type: 'file',
-			// 			extraInfo: {
-			// 				packageDir: 'diskUtils',
-			// 				startPage: 'diskUtils.html'
-			// 			},
-			// 		}]
-			// 	}]
-			// }, {
-			// 	name: 'Three',
-			// 	id: 'folder-3',
-			// 	type: 'folder',
-			// 	data: {}
-			// }]
+		// items: [{
+		// 	name: 'Servers',
+		// 	id: 'folder-1',
+		// 	type: 'folder',
+		// 	data: {},
+		// 	folderChildren: [{
+		// 		name: 'new Folder',
+		// 		type: 'folder'
+		// 	}, {
+		// 		name: 'Raspberry Pi 1',
+		// 		id: 'file-1',
+		// 		type: 'file',
+		// 		extraInfo: {
+		// 			ipAddress: '',
+		// 			username: '',
+		// 			password: ''
+		// 		}
+		// 	}, {
+		// 		name: 'Raspberry Pi 2',
+		// 		id: 'file-2',
+		// 		type: 'file',
+		// 		extraInfo: {
+		// 			ipAddress: '',
+		// 			username: '',
+		// 			password: ''
+		// 		}
+		// 	}]
+		// }, {
+		// 	name: 'Packages',
+		// 	id: 'folder-2',
+		// 	type: 'folder',
+		// 	folderChildren: [{
+		// 		name: 'Disk Utils',
+		// 		type: 'folder',
+		// 		folderChildren: [{
+		// 			name: 'List',
+		// 			id: 'file-1',
+		// 			type: 'file',
+		// 			extraInfo: {
+		// 				packageDir: 'diskUtils',
+		// 				startPage: 'diskUtils.html'
+		// 			},
+		// 		}]
+		// 	}]
+		// }, {
+		// 	name: 'Three',
+		// 	id: 'folder-3',
+		// 	type: 'folder',
+		// 	data: {}
+		// }]
 
 		// }
 		treeViewJSON = JSON.parse(localStorage.getItem('treeView'));

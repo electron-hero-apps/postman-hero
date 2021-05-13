@@ -22,6 +22,7 @@ contextMenu.append(new MenuItem({
 		// 	if (err) throw err;
 		// 	buildTreeView('#files', localStorage.getItem('currentPath'))
 		// });
+		console.log('adding here....');
 		treeViewJSON.items.push({
 			name: 'New Collection',
 			id: 'folder-1',
@@ -84,17 +85,32 @@ folderContextMenu.append(new MenuItem({
 	label: 'Delete',
 	click() {
 		if (confirm("Are you sure?") === true) {
-			var filePath = localStorage.getItem('currentPath');
-			var filename = $(currentListItem).html();
-			fs.unlink(path.join(filePath, filename), function(err, data) {
-				if (err) {
-					alert(err)
-				}
-				buildTreeView('#files', localStorage.getItem('currentPath'))
-			});
+			var index = treeViewJSON.items.indexOf($(currentListItem).data('folderJSON'));
+			treeViewJSON.items.splice(index,1);
+			localStorage.setItem('treeView', JSON.stringify(treeViewJSON));
+			$('#files').empty();
+			buildTreeViewFromJSON('#files', treeViewJSON)
 		}
 	}
 }));
+
+folderContextMenu.append(new MenuItem({
+	label: 'Add Sub-Folder',
+	click() {
+		// if (confirm("Are you sure?") === true) {
+		// 	var filePath = localStorage.getItem('currentPath');
+		// 	var filename = $(currentListItem).html();
+		// 	fs.unlink(path.join(filePath, filename), function(err, data) {
+		// 		if (err) {
+		// 			alert(err)
+		// 		}
+		// 		buildTreeView('#files', localStorage.getItem('currentPath'))
+		// 	});
+		// }
+	}
+}));
+
+
 
 // folderContextMenu.append(new MenuItem({
 // 	label: 'New File',
@@ -149,12 +165,6 @@ window.addEventListener('contextmenu', (e) => {
 			window: remote.getCurrentWindow()
 		})
 
-		var index = treeViewJSON.items.indexOf($(el).data('folderJSON'));
-		treeViewJSON.items[index].name = 'Renamed Folder';
-
-		localStorage.setItem('treeView', JSON.stringify(treeViewJSON));
-		$('#files').empty();
-		buildTreeViewFromJSON('#files', treeViewJSON)
 	}
 
 }, false)
@@ -177,16 +187,11 @@ function handleFileItemKeyDown(event) {
 		}
 
 		if (event.keyCode === 13) {
-			// hit enter, go ahead and rename file
-			// var oldPath = $(this).data('path');
-			// newPath = oldPath.split(path.sep);
-			// newPath.pop();
-			// newPath = newPath.join(path.sep);
-			// newPath = path.join(newPath,$(currentListItem).html())
-			// fs.rename(oldPath, newPath, function(err, data) {
-			// 	console.log(err);
-			// 	console.log('here in rename callback')
-			// })
+			var index = treeViewJSON.items.indexOf($(currentListItem).data('folderJSON'));
+			treeViewJSON.items[index].name = $(currentListItem).html();
+			localStorage.setItem('treeView', JSON.stringify(treeViewJSON));
+			$('#files').empty();
+			buildTreeViewFromJSON('#files', treeViewJSON)
 		}
 
 		$(currentListItem).removeAttr('contenteditable');
