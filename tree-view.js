@@ -1,4 +1,31 @@
 marginSize = 21;
+var folderCnt = 1;
+
+function onDrop(ev, target) {
+	// var src = ev.dataTransfer.getData("Text");
+	// ev.target.appendChild(document.getElementById(src));
+	// console.log(ev);
+	// console.log('here in drop');
+	// console.log(ev);
+
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	console.log(data);
+	console.log(target.id);
+}
+
+function onDragStart(evt) {
+	evt.dataTransfer.setData("text", evt.target.id);
+}
+
+function onDragOver(evt) {
+	evt.preventDefault()
+
+}
+
+function onDragEnter(evt) {
+	evt.preventDefault()
+}
 
 function addFolder(_folderName, elementToAppendTo, _path) {
 	var folderName;
@@ -16,6 +43,8 @@ function addFolder(_folderName, elementToAppendTo, _path) {
 		_path = _folderName.folderChildren;
 	}
 	var newRow = $.parseHTML(newFolderHTML);
+	$(newRow).attr('id', 'folderId-' + folderCnt);
+	folderCnt += 1;
 	var newMargin = $(elementToAppendTo).data('margin');
 	if (newMargin === undefined) {
         newMargin = 0 - marginSize;
@@ -95,7 +124,7 @@ function addTopLevelFolder(folderName, elementToAppendTo, _path) {
 	elementToAppendTo.append(newRow);
 }
 
-var newFolderHTML = '<span class="nav-group-item">' +
+var newFolderHTML = '<span class="nav-group-item" draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)" ondragenter="onDragEnter(event)" ondrop="onDrop(event, this)">' +
 	'<span class="icon opener icon-right-dir">' +
 	'</span><span class="icon icon-folder"></span>' +
 	'<span class="nav-item-text folder-item">libs</span>' +
@@ -188,6 +217,7 @@ function buildTreeViewFromJSON(elementToAppendTo, json) {
 	var filesToAdd = [];
 	var foldersToAdd = [];
 	var topFolderName = 'bite me';
+	folderCnt = 1;
 
 	_.each(json.items, function(item){
 		//console.log(item.folderChildren);
