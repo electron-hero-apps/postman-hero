@@ -124,7 +124,7 @@ function addTopLevelFolder(folderName, elementToAppendTo, _path) {
 	elementToAppendTo.append(newRow);
 }
 
-var newFolderHTML = '<span class="nav-group-item" draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)" ondragenter="onDragEnter(event)" ondrop="onDrop(event, this)">' +
+var newFolderHTML = '<span class="nav-group-item noDropBorder" draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)" ondragenter="onDragEnter(event)" ondrop="onDrop(event, this)">' +
 	'<span class="icon opener icon-right-dir">' +
 	'</span><span class="icon icon-folder"></span>' +
 	'<span class="nav-item-text folder-item">libs</span>' +

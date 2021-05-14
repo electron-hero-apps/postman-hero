@@ -13,6 +13,18 @@ var treeViewJSON;
 
 $(document)
 	.ready(function() {
+
+
+
+
+		$(document).on("dragover", "span.nav-group-item", function(e) {
+			e.preventDefault();
+			$(e.target).addClass('dropBorder').removeClass('noDropBorder');
+		}).bind("dragleave drop", function(e) {
+			e.preventDefault();
+			$(e.target).removeClass('dropBorder').addClass('noDropBorder');
+		});
+
 		$(document)
 			.on('click', '.icon.opener', handleOpenerClick);
 		$(document)

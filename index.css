@@ -91,3 +91,13 @@ span.icon.icon-folder {
 
 span.icon.icon-doc-text {
 }
+
+
+
+.dropBorder {
+	border:1px solid red;
+}
+
+.noDropBorder {
+	border:1px solid transparent;
+}
