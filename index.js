@@ -9,6 +9,8 @@ var Client = require('ssh2')
 	.Client;
 
 var treeViewJSON;
+var dropOnTitleText;
+
 
 
 $(document)
@@ -19,6 +21,7 @@ $(document)
 
 		$(document).on("dragover", "span.nav-group-item", function(e) {
 			e.preventDefault();
+			dropOnTitleText = $(e.target).hasClass('nav-item-text');
 			$(e.target).addClass('dropBorder').removeClass('noDropBorder');
 		}).bind("dragleave drop", function(e) {
 			e.preventDefault();

@@ -1,7 +1,7 @@
 marginSize = 21;
 var folderCnt = 1;
 
-function onDrop(ev, target) {
+function onDrop(ev, target, title) {
 	// var src = ev.dataTransfer.getData("Text");
 	// ev.target.appendChild(document.getElementById(src));
 	// console.log(ev);
@@ -12,6 +12,7 @@ function onDrop(ev, target) {
 	var data = ev.dataTransfer.getData("text");
 	console.log(data);
 	console.log(target.id);
+	console.log(dropOnTitleText);
 }
 
 function onDragStart(evt) {
