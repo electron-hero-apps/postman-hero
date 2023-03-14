@@ -10,14 +10,24 @@ var Client = require('ssh2')
 
 var treeViewJSON;
 var dropOnTitleText;
-
-
+var foundItem;
 
 $(document)
 	.ready(function() {
 
-
-
+		function lookForNodeById(inputJSON, idToFind) {
+			_.find(inputJSON,function(item, i){
+				var children = item.folderChildren;
+				if (item.id === idToFind) {
+					foundItem = item;
+					return true;
+				}
+				if (children && children.length > 0 ) {
+					lookForNodeById(item.folderChildren, idToFind);
+				}
+			})
+			return foundItem;
+		}
 
 		$(document).on("dragover", "span.nav-group-item", function(e) {
 			e.preventDefault();
@@ -36,6 +46,8 @@ $(document)
 			.on('click', '.clickable-nav-item', handleFileItemClick);
 		$(document)
 			.on('keydown', '.folder-item', handleFileItemKeyDown);
+		$(document)
+			.on('keydown', '.file-item', handleFileItemKeyDown);
 
 
 		// var treeViewJSON = {
@@ -98,6 +110,17 @@ $(document)
 				items: []
 			}
 		}
+
+		console.log(JSON.stringify(treeViewJSON));
+
+		console.log('before');
+		var node = lookForNodeById(treeViewJSON.items, 'file-1');
+		console.log('done with find');
+		console.log(node);
+		console.log('after');
+
+
+
 		buildTreeViewFromJSON('#files', treeViewJSON)
 		//buildTreeView('#files', __dirname);
 

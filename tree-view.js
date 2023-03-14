@@ -70,6 +70,8 @@ function addFolder(_folderName, elementToAppendTo, _path) {
 	}
 	$(newRow).find('.nav-item-text').data('entryType', 'folder');
 	$(newRow).find('.nav-item-text').data('folderJSON', _folderName);
+	$(newRow).find('.nav-item-text').data('id', _folderName.id);
+
 
 	$(newRow).find('.content-area').toggle(false);
 	$(newRow).find('.content-area').data('margin', newMargin);
@@ -80,10 +82,13 @@ function addFolder(_folderName, elementToAppendTo, _path) {
 }
 
 function addFile(_fileName, elementToAppendTo, _path) {
-	console.log('here in add file...')
+	console.log('here in add file...');
+	console.log(_fileName);
 	var fileName;
+	var fileId;
 	if (typeof(_fileName) !== 'string') {
-		fileName = _fileName.name
+		fileName = _fileName.name;
+		fileId = _fileName.id;
 	} else {
 		fileName = _fileName;
 	}
@@ -108,6 +113,8 @@ function addFile(_fileName, elementToAppendTo, _path) {
 	console.log(_fileName);
 
 	$(newRow).find('.nav-item-text').data('entryType', 'file');
+	$(newRow).find('.nav-item-text').data('id', fileId);
+
 	$(newRow).find('.nav-item-text').data('extraInfo', _fileName.extraInfo);
 
 	elementToAppendTo.append(newRow);
@@ -145,8 +152,13 @@ var topLevelFolder = '<span class="nav-group-item">' +
 
 function handleItemClick() {
 	var fileType = $(this).data('entryType');
+
+	console.log($(this).data());
+
+
 	var filePath = $(this).data('path');
-    $('.fileType').html(fileType);
+	var fileId = $(this).data('id')
+    $('.fileType').html(fileType + ' ' + fileId);
 	$('.filePath').html(filePath);
 }
 
@@ -155,6 +167,7 @@ function handleFileItemClick() {
 	console.log('here in file item click');
 	$('#files .nav-group-item').removeClass('file-active');
 	var fileItem = $(this).closest('.nav-group-item');
+	var text = $(this).closest('.nav-item-text');
 	$(fileItem).addClass('file-active');
 }
 
@@ -182,6 +195,7 @@ function handleOpenerClick() {
 				}
 				if (item.type === 'file') {
 					console.log('adding file')
+					console.log(item.id)
 					filesToAdd.push(item);
 				}
 			})
