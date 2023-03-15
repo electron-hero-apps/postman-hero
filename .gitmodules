@@ -1,3 +1,0 @@
-[submodule "tree-view"]
-	path = common/tree-view
-	url = https://github.com/electron-hero-common/tree-view.git
